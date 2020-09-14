@@ -19,8 +19,8 @@ namespace TelerikHTML5ReportViewerTests
         [TestCleanup]
         public void CleanupAfterAfterEveryTest()
         {            
-            //driver.Close();
-            //driver.Quit();
+            driver.Close();
+            driver.Quit();
         }
     }
 }

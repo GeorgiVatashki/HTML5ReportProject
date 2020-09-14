@@ -61,10 +61,6 @@ namespace TelerikHTML5ReportViewerTests
             Assert.IsTrue(reportPage.IsLoaded, "The HTMLReportViwer extension did not open successfully.");
         }
 
-
-        /// <summary>
-        /// //
-        /// </summary>
         
         [TestMethod]
         [TestProperty("Author", "GeorgiVatashki")]
@@ -94,15 +90,31 @@ namespace TelerikHTML5ReportViewerTests
 
         [TestMethod]
         [TestProperty("Author", "GeorgiVatashki")]
-        [Description("Validate that the Report Designers extension works.")]
+        [Description("Validate that the Full Page button works.")]
         public void TCID7_FullPageButton()
         {
             ReportViewerPage reportPage = new ReportViewerPage(driver);
             reportPage.GoTo();
             reportPage.FullScreen();
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
-            wait.Until(ExpectedConditions.ElementExists(By.XPath("//*[@data-id='htmlTextBoxReportDesigners_1']")));
-            Assert.AreEqual("authoring environments include features such as WYSIWYG report design surface, enhanced support for", reportPage.ExpectedReportDesignersString.Text);
+            wait.Until(ExpectedConditions.ElementExists(By.XPath("//*[@style='height: 667.746px; width: 1657px;']")));
+            Assert.AreEqual("height: 667.746px; width: 1657px;", reportPage.CurrentFullImage);
+        }
+
+        [TestMethod]
+        [TestProperty("Author", "GeorgiVatashki")]
+        [Description("Validate that the Refresh button works.")]
+        public void TCID8_RefreshButton()
+        {
+            ReportViewerPage reportPage = new ReportViewerPage(driver);
+            reportPage.GoTo();
+            reportPage.HTMLReportViwerButton();
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+            wait.Until(ExpectedConditions.ElementExists(By.XPath("//*[contains(text(),'The HTML5 Report Viewer provides: ')]")));
+            Assert.IsTrue(reportPage.IsLoaded, "The HTMLReportViwer extension did not open successfully.");
+            reportPage.Refresh();            
+            Assert.IsTrue(wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@style='height: 297px; width: 737px;']"))).Displayed);          
+
         }
 
     }
