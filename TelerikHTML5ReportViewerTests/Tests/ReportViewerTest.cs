@@ -61,6 +61,10 @@ namespace TelerikHTML5ReportViewerTests
             Assert.IsTrue(reportPage.IsLoaded, "The HTMLReportViwer extension did not open successfully.");
         }
 
+
+        /// <summary>
+        /// //
+        /// </summary>
         
         [TestMethod]
         [TestProperty("Author", "GeorgiVatashki")]
