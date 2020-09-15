@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NLog;
+using OpenQA.Selenium;
 using System;
 using System.Net;
 
@@ -6,6 +7,7 @@ namespace TelerikHTML5ReportViewerTests
 {
     public class ReportViewerPage : BasePage
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public ReportViewerPage(IWebDriver driver) : base(driver)
         {
         }
@@ -32,26 +34,30 @@ namespace TelerikHTML5ReportViewerTests
         internal void GoTo()
         {
             Driver.Navigate().GoToUrl(URL.reportViewerLocalhostURL);
+            Logger.Info($"Open URL =>{URL.reportViewerLocalhostURL}");
             Driver.Manage().Window.Maximize();
+
         }
 
         internal void TogglePrintPreview()
         {
             IWebElement printPreviewButton = Driver.FindElements(By.XPath("//*[@class='t-font-icon k-icon t-i-file']"))[1];
             printPreviewButton.Click();
-            
+            Logger.Info("Click Print Preview button ");
         }
 
         internal void ToggleParametersButton()
         {
             IWebElement parametersButton = Driver.FindElements(By.XPath("//*[@class='t-font-icon k-icon t-i-filter']"))[0];
             parametersButton.Click();
+            Logger.Info("Click Toggle Parameters Area button ");
         }
 
         internal void HTMLReportViwerButton()
         {
             IWebElement ExpandReportButton = Driver.FindElement(By.XPath("//body//img[1]"));
             ExpandReportButton.Click();
+            Logger.Info("Click HTML5 Report Viwer Button in order to expand and validate the text");
         }
 
         internal bool IsLoaded
@@ -73,22 +79,26 @@ namespace TelerikHTML5ReportViewerTests
         internal void TelerikReportingRESTButton()
         {
             ReportingRESTButton.Click();
+            Logger.Info("Click the Telerik Reporting REST Button in order to expand and validate the text");
         }
 
         internal void ReportButton()
         {
             ReportDesignersButton.Click();
+            Logger.Info("Click the Report Designers Button in order to expand and validate the text");
         }
 
         internal void FullScreen()
         {            
             FullScreenButton.Click();
+            Logger.Info("Click the Toggle Full Page button");
         }
 
         internal void Refresh()
         {
             IWebElement refresh = Driver.FindElements(By.XPath("//*[@class='t-font-icon k-icon t-i-refresh-a']"))[1];
             refresh.Click();
+            Logger.Info("Click the Refresh button");
         }
     }
 }

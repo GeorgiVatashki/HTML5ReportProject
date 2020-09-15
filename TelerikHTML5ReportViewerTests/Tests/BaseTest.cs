@@ -1,12 +1,14 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using AutomationResources;
-
+using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
+using NLog;
 
 namespace TelerikHTML5ReportViewerTests
 {
+   
     public class BaseTest
-    {
+    {        
         public IWebDriver driver;
 
         [TestInitialize]
@@ -20,7 +22,7 @@ namespace TelerikHTML5ReportViewerTests
         public void CleanupAfterAfterEveryTest()
         {            
             driver.Close();
-            driver.Quit();
+            driver.Quit();            
         }
     }
 }

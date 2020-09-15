@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NLog;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace TelerikHTML5ReportViewerTests
 {
+    
     public class BasePage
     {
         protected IWebDriver Driver;
