@@ -6,6 +6,14 @@ using System.Threading;
 
 namespace TelerikHTML5ReportViewerTests
 {
+
+
+    //INFO///
+    /// <summary>
+    /// In order to run all of these tests first you have to open (expand) ExpectedHTML5String Project and to select TelerikHTML5ReportViewerPage.html file.
+    /// Finally through the main menu select Debug- Start Without Debugging option. Now you are able to run all tests against that page.
+    /// </summary>
+
     [TestClass]
     [TestCategory("ReportViewerPage")]
     public class ReportViewerTest : BaseTest
