@@ -1,31 +1,75 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using AutomationResources;
-using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
 using NLog;
+using System;
 
 namespace TelerikHTML5ReportViewerTests
 {
-    
+
+    [TestCategory("CreatingReports")]
+    [TestClass]
     public class BaseTest
     {
-        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();        
+        public TestContext TestContext { get; set; }
+        private ScreenshotTaker ScreenshotTaker { get; set; }
 
-        public IWebDriver driver;
+        protected IWebDriver driver;
 
         [TestInitialize]
-        public void SetupBeforeEveryTest()
-        {
+        public void SetupBeforeEverySingleTest()
+        {            
+            Logger.Debug("The Test Started");
+            Reporter.AddTestCaseMetadataToHtmlReport(TestContext);
             WebDriverFactory factory = new WebDriverFactory();
-            driver = factory.Create(BrowserType.Chrome); 
+            driver = factory.Create(BrowserType.Chrome);
+            ScreenshotTaker = new ScreenshotTaker(driver, TestContext);
         }
 
         [TestCleanup]
-        public void CleanupAfterAfterEveryTest()
-        {            
-            driver.Close();
+        public void TearDownForEverySingleTest()
+        {
+            Logger.Debug(GetType().FullName + " started a method tear down");
+            try
+            {
+                TakeScreenshotForTestFailure();
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Source);
+                Logger.Error(e.StackTrace);
+                Logger.Error(e.InnerException);
+                Logger.Error(e.Message);
+            }
+            finally
+            {
+                StopBrowser();
+                Logger.Debug(TestContext.TestName);
+                Logger.Debug("The Test Stopped");                
+            }
+        }
+
+        private void TakeScreenshotForTestFailure()
+        {
+            if (ScreenshotTaker != null)
+            {
+                ScreenshotTaker.CreateScreenshotIfTestFailed();
+                Reporter.ReportTestOutcome(ScreenshotTaker.ScreenshotFilePath);
+            }
+            else
+            {
+                Reporter.ReportTestOutcome("");
+            }
+        }
+
+        private void StopBrowser()
+        {
+            if (driver == null)
+                return;
             driver.Quit();
-            Logger.Info("Close current test");
+            driver = null;
+            Logger.Trace("Browser stopped successfully.");
         }
     }
 }

@@ -28,7 +28,7 @@ namespace TelerikHTML5ReportViewerTests
         {
             ReportViewerPage reportPage = new ReportViewerPage(driver);
             reportPage.GoTo();
-            reportPage.TogglePrintPreview();            
+            reportPage.TogglePrintPreview();
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
             wait.Until(ExpectedConditions.ElementExists(By.XPath("//*[@data-id='SampleReport_1']")));
             Assert.AreEqual("position: absolute; overflow: hidden; left: 38px; top: 174px; width: 740px; height: 100px;", reportPage.CurrentImage);
