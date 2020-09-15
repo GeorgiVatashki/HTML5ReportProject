@@ -6,9 +6,11 @@ using NLog;
 
 namespace TelerikHTML5ReportViewerTests
 {
-   
+    
     public class BaseTest
-    {        
+    {
+        private static readonly NLog.Logger Logger = LogManager.GetCurrentClassLogger();
+
         public IWebDriver driver;
 
         [TestInitialize]
@@ -22,7 +24,8 @@ namespace TelerikHTML5ReportViewerTests
         public void CleanupAfterAfterEveryTest()
         {            
             driver.Close();
-            driver.Quit();            
+            driver.Quit();
+            Logger.Info("Close current test");
         }
     }
 }
