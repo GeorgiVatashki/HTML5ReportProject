@@ -101,5 +101,6 @@ namespace TelerikHTML5ReportViewerTests
             refresh.Click();
             Reporter.LogPassingTestStepToBugLogger("Click the Refresh button.");            
         }
+        
     }
 }

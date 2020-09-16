@@ -10,8 +10,9 @@ namespace TelerikHTML5ReportViewerTests
 
     //INFO///
     /// <summary>
-    /// In order to run all of these tests first you have to open (expand) ExpectedHTML5String Project and to select TelerikHTML5ReportViewerPage.html file.
-    /// Finally through the main menu select Debug- Start Without Debugging option. Now you are able to run all tests against that page.
+    /// In order to run all of these tests first you have to open (expand) the ExpectedHTML5String Project and to select TelerikHTML5ReportViewerPage.html file.
+    /// Finally through the main menu select Debug- Start Without Debugging option. This will load the Report Page. Now you are able to run all tests against that page.
+    /// The Results are in C:\temp
     /// </summary>
 
     [TestClass]
@@ -123,8 +124,7 @@ namespace TelerikHTML5ReportViewerTests
             reportPage.Refresh();            
             Assert.IsTrue(wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@style='height: 297px; width: 737px;']"))).Displayed);          
 
-        }
-
+        }  
     }
 }
 
