@@ -8,6 +8,6 @@ namespace TelerikHTML5ReportViewerTests
 {
     public static class URL
     {
-        public static string reportViewerLocalhostURL = "https://localhost:44373/TelerikHTML5ReportViewerPage.html";
+        public static string reportViewerLocalhostURL = "https://localhost:44363/Html5ReportViewerPage.html"; 
     }
 }
